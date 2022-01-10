@@ -1,0 +1,23 @@
+{% load index %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Load papers done</title>
+    <link rel="stylesheet" TYPE="text/css" href="{% static 'restore_order/css/style.css' %}">
+</head>
+<body>
+<h1>Load papers done</h1>
+<form action="{% url 'restore_order:load_papers' %}" method="get">
+    {% csrf_token %}
+    <h2>{{ area_name }}
+        <input type="hidden" name="area_name" value="{{ area_name }}">
+    </h2>
+    {% for serv_id in serv_ids %}
+        <p>{{ serv_id }}</p>
+    {% endfor %}
+</form>
+</body>
+</html>

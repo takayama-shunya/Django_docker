@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DjangoModelDependency</ID>
+  <OriginalElement>#Service_ID</OriginalElement>
+  <nodes>
+    <node x="1339.8966049382716" y="575.0">forms.models.Officer</node>
+    <node x="694.4999999999999" y="215.0">forms.models.Resemble_Temp_Name</node>
+    <node x="26.5" y="22.0">forms.models.Of_What</node>
+    <node x="234.5" y="193.0">forms.models.Resemble_Item</node>
+    <node x="1321.8966049382716" y="0.0">forms.models.Large_Area</node>
+    <node x="495.5" y="22.0">forms.models.Joint</node>
+    <node x="627.701500803275" y="597.0">forms.models.Citizen</node>
+    <node x="915.125" y="542.0">forms.models.Template</node>
+    <node x="729.5" y="22.0">forms.models.What_Temp</node>
+    <node x="1209.7716049382716" y="259.0">forms.models.Small_Area</node>
+    <node x="1009.5" y="22.0">forms.models.Temp_Of_What</node>
+    <node x="261.5" y="22.0">forms.models.What</node>
+    <node x="237.0" y="586.0">forms.models.Standard_Item</node>
+    <node x="501.875" y="823.0">forms.models.Filled_Form</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="forms.models.Resemble_Temp_Name" target="forms.models.Joint" relationship="ForeignKey">
+      <point x="-109.99999999999989" y="-126.5" />
+      <point x="749.5" y="168.0" />
+      <point x="602.5" y="168.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="forms.models.Filled_Form" target="forms.models.Template" relationship="ForeignKey">
+      <point x="59.75" y="-71.5" />
+      <point x="681.125" y="798.0" />
+      <point x="1024.125" y="798.0" />
+      <point x="0.0" y="115.5" />
+    </edge>
+    <edge source="forms.models.Resemble_Item" target="forms.models.Joint" relationship="ForeignKey">
+      <point x="89.33333333333331" y="-148.5" />
+      <point x="457.8333333333333" y="168.0" />
+      <point x="602.5" y="168.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="forms.models.Resemble_Item" target="forms.models.Of_What" relationship="ForeignKey">
+      <point x="-89.33333333333331" y="-148.5" />
+      <point x="279.16666666666663" y="168.0" />
+      <point x="134.0" y="168.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="forms.models.Resemble_Temp_Name" target="forms.models.Temp_Of_What" relationship="ForeignKey">
+      <point x="110.00000000000011" y="-126.5" />
+      <point x="969.5" y="168.0" />
+      <point x="1142.5" y="168.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="forms.models.Template" target="forms.models.Resemble_Temp_Name" relationship="ForeignKey">
+      <point x="-54.5" y="-115.5" />
+      <point x="969.625" y="516.0" />
+      <point x="859.4999999999999" y="516.0" />
+      <point x="0.0" y="126.5" />
+    </edge>
+    <edge source="forms.models.Small_Area" target="forms.models.Large_Area" relationship="ForeignKey">
+      <point x="0.0" y="-82.5" />
+      <point x="1327.7716049382716" y="168.0" />
+      <point x="1440.3966049382716" y="168.0" />
+      <point x="0.0" y="71.5" />
+    </edge>
+    <edge source="forms.models.Template" target="forms.models.Small_Area" relationship="ForeignKey">
+      <point x="54.5" y="-115.5" />
+      <point x="1078.625" y="516.0" />
+      <point x="1327.7716049382716" y="516.0" />
+      <point x="0.0" y="82.5" />
+    </edge>
+    <edge source="forms.models.Resemble_Temp_Name" target="forms.models.What_Temp" relationship="ForeignKey">
+      <point x="1.1368683772161603E-13" y="-126.5" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="forms.models.Standard_Item" target="forms.models.Resemble_Item" relationship="ForeignKey">
+      <point x="0.0" y="-71.5" />
+      <point x="0.0" y="148.5" />
+    </edge>
+    <edge source="forms.models.Officer" target="forms.models.Small_Area" relationship="ForeignKey">
+      <point x="-50.25" y="-82.5" />
+      <point x="1390.1466049382716" y="516.0" />
+      <point x="1327.7716049382716" y="516.0" />
+      <point x="0.0" y="82.5" />
+    </edge>
+    <edge source="forms.models.Officer" target="forms.models.Large_Area" relationship="ForeignKey">
+      <point x="50.25" y="-82.5" />
+      <point x="1490.6466049382716" y="516.0" />
+      <point x="1504.6466049382716" y="516.0" />
+      <point x="1504.6466049382716" y="168.0" />
+      <point x="1440.3966049382716" y="168.0" />
+      <point x="0.0" y="71.5" />
+    </edge>
+    <edge source="forms.models.Resemble_Item" target="forms.models.What" relationship="ForeignKey">
+      <point x="0.0" y="-148.5" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="forms.models.Filled_Form" target="forms.models.Citizen" relationship="ForeignKey">
+      <point x="-59.75" y="-71.5" />
+      <point x="561.625" y="798.0" />
+      <point x="736.201500803275" y="798.0" />
+      <point x="0.0" y="60.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.5161689108363998" showDependencies="false" x="786.1859331598818" y="832.4347876104703" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+</Diagram>
+

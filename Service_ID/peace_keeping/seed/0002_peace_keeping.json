@@ -1,0 +1,30 @@
+[
+{
+ "model": "peace_keeping.service_stock",
+ "pk": 1,
+ "fields": {
+  "serv_name": "住民異動届",
+  "serv_id": "c73c26c29--1-1",
+  "core_serv_id": "c73c26c29",
+  "opt_serv_id": "",
+  "area_code": 1,
+  "ver": 1,
+  "created_at": "2021-12-16T01:12:16.493Z",
+  "modified_at": "2021-12-16T01:12:16.503Z"
+ }
+},
+{
+ "model": "peace_keeping.used_service",
+ "pk": 1,
+ "fields": {
+  "serv_id": "c73c26c29--1-1",
+  "issue_num": 1,
+  "my_num_id": "000011110001",
+  "residence_num": null,
+  "used_serv_item_ids": "['c73', 'c26', 'c29', 'c73/2', 'c26/2', 'c29/2']",
+  "send_vals": "['adam', 'us', '000011110001', 'bob', 'us', '000011110002']",
+  "created_at": "2021-12-16T01:32:02.235Z",
+  "modified_at": "2021-12-16T01:32:02.243Z"
+ }
+}
+]

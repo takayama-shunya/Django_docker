@@ -1,0 +1,10 @@
+{% if serv_items.errors %}
+    <ul>
+        {% for error in serv_items.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% for idx, serv_item in serv_items.items %}
+    <p> item{{ idx }}: <input type="text" name="serv_item{{ idx }}" required></p>
+{% endfor %}

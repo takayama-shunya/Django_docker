@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Service</title>
+</head>
+<body>
+<form name="select_serv" action="{% url 'peace_keeping:show_serv' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <div>
+            <h1>Select Service</h1>
+        </div>
+        <div class="fieldWrapper">
+            {% if serv_stocks.errors %}
+                <ul>
+                    {% for error in serv_stocks.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <h2>{{ area_name }}
+                <input type="hidden" name="area_name" value="{{ area_name }}">
+            </h2>
+            {% for serv_stock in serv_stocks %}
+                <p>
+                    <input type="radio" name="serv_id" id="{{ serv_stock.serv_id }}"
+                           value="{{ serv_stock.serv_id }}">
+                    <label for="{{ serv_stock.serv_id }}">{{ serv_stock.serv_name }}</label>
+                </p>
+            {% endfor %}
+        </div>
+    </fieldset>
+</form>
+<script src="{% static 'peace_keeping/javascript/submit_serv.js' %}"></script>
+</body>

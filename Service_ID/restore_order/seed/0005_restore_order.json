@@ -1,0 +1,23 @@
+[
+{
+ "model": "restore_order.raw_item",
+ "pk": 16,
+ "fields": {
+  "area": 141500,
+  "name_in_paper": "住民異動届",
+  "serv_id": "c26c73c29-o30o86-141500-1",
+  "serv_name": "住民異動届",
+  "items_in_paper_serial": "氏名|連絡先|住所|新住所",
+  "items_order_by_serv_item_serial": "届出人氏名|電話番号|住所|新住所",
+  "items_order_by_serv_item_id_serial": "c73|o30|c26|o86",
+  "core_serv_id": "c26c73c29",
+  "core_items_serial": "住所",
+  "core_items_not_in_paper_serial": "届出人氏名|マイナンバーID",
+  "opt_serv_id": "o30o86",
+  "opt_items_serial": "電話番号|新住所",
+  "original_file_path": "Service_ID/restore_order/csv/神奈川県相模原市.csv",
+  "created_at": "2021-12-21T08:18:26.809Z",
+  "modified_at": "2021-12-21T08:18:26.832Z"
+ }
+}
+]

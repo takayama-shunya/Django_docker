@@ -1,0 +1,27 @@
+<div id="fuzzy-search">
+    <h2>{{ area_name }}
+        <input type="hidden" name="area_name" value="{{ area_name }}" ref="area_name">
+        <input type="hidden" value="{{ base_url }}" ref="base_url">
+    </h2>
+    <div class="parent">
+        <span>届出名orご用件：</span>
+        <input type="text"
+               v-model="serv_name_or_needs"
+               v-on:keyup="getCandidates()"
+               ref="input"
+               required>
+        <div class="child">
+            <div v-if=" !is_mounted"></div>
+            <div v-else-if="candidates.length === 0 ">
+                <span>候補がありません。</span>
+            </div>
+            <div v-else >
+                <div v-for="candidate in candidates">
+                    <label>
+                        <input type="radio" name="serv_name" :value="candidate" v-on:click="select($event)">[[candidate]]
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

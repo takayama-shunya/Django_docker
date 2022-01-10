@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Service</title>
+</head>
+<body>
+<form name="confirm_form" action="{% url 'peace_keeping:register_used_serv' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <div>
+            <h1>{{ area_name }} : {{ serv_name }}
+                <input type="hidden" name="area_name" value="{{ area_name }}">
+                <input type="hidden" name="serv_name" value="{{ serv_name }}">
+                <input type="hidden" name="serv_id" value="{{ serv_id }}">
+            </h1>
+        </div>
+        <div class="fieldWrapper" id="inputs">
+            {% if phrase_val_list %}
+                {% for el in phrase_val_list %}
+                    <p>{{ el.serv_item }}
+                        ：{{ el.value }}
+                    </p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div>
+            <input type="submit" name="submit" value="back">
+            <input type="submit" name="submit" value="submit">
+        </div>
+    </fieldset>
+</form>
+</body>

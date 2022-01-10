@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Merge Words</title>
+</head>
+<body>
+<h1>Merged words</h1>
+{% if phrases %}
+    {% for phrase in phrases %}
+        <p>{{ phrase }}</p>
+    {% endfor %}
+{% endif %}
+</body>

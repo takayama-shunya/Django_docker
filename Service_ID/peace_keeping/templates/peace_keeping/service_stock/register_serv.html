@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Registered</title>
+</head>
+<body>
+<div>
+    <h1>Service registered</h1>
+    <p>サービスID：{{ serv_id }}</p>
+    <p>サービス名：{{ serv_name }}</p>
+</div>
+<div class="fieldWrapper">
+    {% for serv_item in serv_items %}
+        <p>サービス項目：{{ serv_item }}</p>
+    {% endfor %}
+</div>
+</body>

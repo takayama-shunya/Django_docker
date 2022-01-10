@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Service</title>
+</head>
+<body>
+<div>
+    <h1>Register Service</h1>
+    <p>サービスID：{{ serv_id.serv_id }}</p>
+    <p>フォーム名：{{ serv_name }}</p>
+</div>
+<div class="fieldWrapper">
+    {% for el in phrase_val_list %}
+        <p>{{ el.serv_item }}
+            ：{{ el.value }}
+        </p>
+    {% endfor %}
+</div>
+</body>

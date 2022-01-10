@@ -1,0 +1,60 @@
+{% load index %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Candidates</title>
+    <link rel="stylesheet" TYPE="text/css" href="{% static 'merge_papers/css/style.css' %}">
+</head>
+<body>
+<h1>Select Candidates</h1>
+<form action="{% url 'restore_order:confirm_candidates' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <h2>{{ area_name }}</h2>
+        <input type="hidden" name="area_name" value="{{ area_name }}">
+        <table class="table-style">
+            <tr>
+                <th>紙の名・項目</th>
+                <th>変換候補</th>
+                <th>記入内容</th>
+            </tr>
+            {% for phrase in phrases %}
+                {% with count=forloop.counter0 %}
+                    <tr>
+                        <td>{{ phrase }}
+                            {% if count == 0 %}
+                                <input type="hidden" name="serv_name" value="{{ phrase }}">
+                            {% else %}
+                                <input type="hidden" name="serv_item_{{ count }}" value="{{ phrase }}">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if count == 0 %}
+                                <select name="can_name" id="can_name">
+                            {% else %}
+                                <select name="can_item_{{ count }}" id="can_item_{{ count }}">
+                            {% endif %}
+                            {% for can in cans|index:count %}
+                                <option value="{{ can }}">{{ can }}</option>
+                            {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            {% if count > 0 %}
+                                <input type="hidden" name="input_{{ count }}" value="{{ inputs|index_minus_1:count }}">
+                                <span>  {{ inputs|index_minus_1:count }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+        </table>
+
+        <input type="submit" value="run">
+    </fieldset>
+</form>
+</body>
+</html>

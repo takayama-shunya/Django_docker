@@ -1,0 +1,80 @@
+[
+{
+ "model": "peace_keeping.service_stock",
+ "pk": 13,
+ "fields": {
+  "serv_name": "住民異動届",
+  "serv_id": "c3c4c6-901000-1",
+  "core_serv_id": "c3c4c6",
+  "core_items_serial": "c3c4c6",
+  "opt_serv_id": null,
+  "opt_items_serial": "",
+  "area": 901000,
+  "ver": 1,
+  "created_at": "2021-12-22T03:48:16.101Z",
+  "modified_at": "2021-12-22T03:48:16.105Z"
+ }
+},
+{
+ "model": "peace_keeping.service_stock",
+ "pk": 14,
+ "fields": {
+  "serv_name": "婚姻届",
+  "serv_id": "c1c2-901000-1",
+  "core_serv_id": "c1c2",
+  "core_items_serial": "夫の氏名|妻の氏名",
+  "opt_serv_id": null,
+  "opt_items_serial": null,
+  "area": 901000,
+  "ver": 1,
+  "created_at": "2021-12-22T03:48:45Z",
+  "modified_at": "2022-01-05T08:01:10.776Z"
+ }
+},
+{
+ "model": "peace_keeping.service_stock",
+ "pk": 16,
+ "fields": {
+  "serv_name": "住民異動届",
+  "serv_id": "c4c3c6-o7o5-141500-1",
+  "core_serv_id": "cc4cc3cc6",
+  "core_items_serial": "住所|届出人氏名|マイナンバーID",
+  "opt_serv_id": "oo7oo5",
+  "opt_items_serial": "電話番号|新住所",
+  "area": 141500,
+  "ver": 1,
+  "created_at": "2021-12-22T06:15:40.052Z",
+  "modified_at": "2021-12-22T06:15:40.066Z"
+ }
+},
+{
+ "model": "peace_keeping.service_stock",
+ "pk": 17,
+ "fields": {
+  "serv_name": "婚姻届",
+  "serv_id": "c1c2-o6-141500-1",
+  "core_serv_id": "c1c2",
+  "core_items_serial": "夫の氏名|妻の氏名",
+  "opt_serv_id": "o6",
+  "opt_items_serial": "マイナンバーID",
+  "area": 141500,
+  "ver": 1,
+  "created_at": "2022-01-05T07:53:16Z",
+  "modified_at": "2022-01-05T08:01:18.018Z"
+ }
+},
+{
+ "model": "peace_keeping.used_service",
+ "pk": 5,
+ "fields": {
+  "serv_id": "c4c3c6-o7o5-141500-1",
+  "issue_num": 1,
+  "my_num_id": "000011110001",
+  "resident_num": null,
+  "used_serv_item_ids": "['c4', 'c3', 'c6', 'c7', 'c5']",
+  "send_vals": "['US', 'adam', '000011110001', '01-1111-1111', 'JP']",
+  "created_at": "2021-12-22T06:16:04.899Z",
+  "modified_at": "2021-12-22T06:16:04.916Z"
+ }
+}
+]

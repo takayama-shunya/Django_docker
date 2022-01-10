@@ -1,0 +1,50 @@
+{% load index %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ready to load papers</title>
+    <link rel="stylesheet" TYPE="text/css" href="{% static 'restore_order/css/style.css' %}">
+</head>
+<body>
+<h1>Ready to load papers</h1>
+<form action="{% url 'restore_order:load_papers' %}" method="get">
+    {% csrf_token %}
+    <fieldset>
+        <h2>{{ area_name }}
+            <input type="hidden" name="area_name" value="{{ area_name }}">
+        </h2>
+        <table class="table-style">
+            <tr>
+                <th>項目</th>
+                <th>記入内容のサンプル</th>
+            </tr>
+            {% for phrase in phrases %}
+                {% with count=forloop.counter0 %}
+                    <tr>
+                        <td>
+                            {{ phrase }}
+                        </td>
+                        <td>
+                            {% if count > 0 %}
+                                <input type="hidden" name="{{ serv_ids|index:count }}"
+                                       value="{{ inputs|index_minus_1:count }}">
+                                <span>  {{ inputs|index_minus_1:count }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+        </table>
+
+        <div>
+            <p>{{ area_name }}{{ small_area }}のデータ取り込みを実行しますか?</p>
+            <p>この操作により、過去の紙ベースのデータがサービスIDのフォーマットに変換、保存されます。</p>
+            <p><input type="submit" value="実行"></p>
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>
