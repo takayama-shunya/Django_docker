@@ -30,11 +30,12 @@ docker ps
 ```
 
 > CONTAINER ID   IMAGE                    COMMAND                  CREATED       STATUS       PORTS                            NAMES
-> f59768399bea   nginx:1.21.3-alpine      "/docker-entrypoint.…"   2 hours ago   Up 2 hours   80/tcp, 0.0.0.0:8000->8000/tcp   service_id_docker_web_1
-> fb7b45725896   service_id_docker_root   "uwsgi --socket :800…"   2 hours ago   Up 2 hours   8001/tcp                         service_id_docker_root_1
-> 43103b4dce62   service_id_docker_db     "docker-entrypoint.s…"   2 hours ago   Up 2 hours   3306/tcp, 33060/tcp              service_id_docker_db_1
 >
->  ^ this  
+> f59768399bea   nginx:1.21.3-alpine      "/docker-entrypoint.…"   2 hours ago   Up 2 hours   80/tcp, 0.0.0.0:8000->8000/tcp   service_id_docker_web_1
+>
+> fb7b45725896   service_id_docker_root   "uwsgi --socket :800…"   2 hours ago   Up 2 hours   8001/tcp                         service_id_docker_root_1
+>
+> 43103b4dce62   service_id_docker_db     "docker-entrypoint.s…"   2 hours ago   Up 2 hours   3306/tcp, 33060/tcp              service_id_docker_db_1
 
 
 
