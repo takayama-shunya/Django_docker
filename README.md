@@ -1,8 +1,10 @@
 # Docker
 
-Refference
 
-https://note.com/digiangler777/n/n5af9bf35b0c0
+
+## Version
+
+Docker Desktop 4.3.2 (72729) 
 
 
 
@@ -41,11 +43,23 @@ services:
     volumes:
       - db-store:/var/lib/mysql
 
-  app:
-    build: ./docker/python
-    command: uwsgi --socket :8001 --module app.wsgi --py-autoreload 1 --logto /tmp/tmp.log
+  web:
+    image: nginx:1.21.3-alpine
+    ports:
+      - 8000:8000
     volumes:
-      - ./src:/workspace
+      - ./Service_ID:/workspace
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/uwsgi_params:/etc/nginx/uwsgi_params
+    working_dir: /workspace
+    depends_on:
+      - root
+
+  root:
+    build: ./docker/python
+    command: uwsgi --socket :8001 --module root.wsgi --py-autoreload 1 --logto /tmp/tmp.log
+    volumes:
+      - ./Service_ID:/workspace
     expose:
       - "8001"
     depends_on:
@@ -78,10 +92,34 @@ ADD . /workspace/
 #### `python/requirements.txt`
 
 ```
-Django==3.2.7
-uwsgi==2.0.19
-mysqlclient
-autopep8
+asgiref==3.4.1
+backports.zoneinfo==0.2.1
+defusedxml==0.7.1
+diff-match-patch==20200713
+Django==4.0.1
+django-boost==1.7.2
+django-debug-toolbar==3.2.4
+django-import-export==2.7.1
+django-seed==0.3.1
+et-xmlfile==1.1.0
+Faker==11.3.0
+import-export==0.2.67.dev6
+MarkupPy==1.14
+mysqlclient==2.1.0
+odfpy==1.4.1
+openpyxl==3.0.9
+python-dateutil==2.8.2
+PyYAML==6.0
+six==1.16.0
+sqlparse==0.4.2
+tablib==3.1.0
+text-unidecode==1.3
+toposort==1.7
+ua-parser==0.10.0
+user-agents==2.2.0
+uwsgi==2.0.20
+xlrd==2.0.1
+xlwt==1.3.0
 ```
 
 
@@ -191,6 +229,30 @@ server_tokens off;
 
 
 
+### 
+
+### Django
+
+`settings.py`
+
+- `mysql/Dockerfile`で設定した値と合わせるように設定されている。
+- `NAME`と`USER`の変更が必要な場合は、`docker-compose build` `docker-compose up`を実行した後に両者を変更。
+
+```python
+DATABASES = {
+  'default': {
+  'ENGINE': 'django.db.backends.mysql',
+  'NAME': 'django_local',
+  'USER': 'django_user',
+  'PASSWORD': 'secret',
+  'HOST': 'db',
+  'POST': 3306
+  }
+}
+```
+
+
+
 
 
 ## Boot
@@ -205,10 +267,24 @@ docker-compose build
 
 
 
-### Boot Container
+#### Trouble shoot
+
+> ERROR: Service 'app' failed to build : Build failed
 
 ```bash
-docker-compose up -d
+docker-compose run web bundle update
+```
+
+
+
+
+
+### Boot Container
+
+`-d`でバックグラウンドで実行。Djangoではオプション無しの方がデバッグしやすい。
+
+```bash
+docker-compose up
 ```
 
 
@@ -243,32 +319,102 @@ docker-compose restart
 
 
 
-### 
+## Commands
 
-## Django
-
-`settings.py`
-
-```python
-DATABASES = {
-  'default': {
-  'ENGINE': 'django.db.backends.mysql',
-  'NAME': 'django_local',
-  'USER': 'django_user',
-  'PASSWORD': 'secret',
-  'HOST': 'db',
-  'POST': 3306
-  }
-}
-```
-
-
-
-
+### Django
 
 `migrate`
 
 ```bash
 docker-compose exec app ./manage.py migrate
 ```
+
+
+
+`collectstatic`
+
+```bash
+
+```
+
+
+
+
+
+### MySQL
+
+- DjangoとMySQLを組み合わせてDockerで扱う場合、`settings.py`での初期設定は以下。
+- `NAME`と`USER`の変更が必要な場合は、`docker-compose build` `docker-compose up`を実行した後に両者を変更。
+
+##### After
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'service_id', # here
+        'USER': 'root',       # here
+        'PASSWORD': 'secret',
+        'HOST': 'db',
+        'POST': 3306
+    }
+}
+```
+
+
+
+#### コンテナIDを確認
+
+```
+docker ps
+```
+
+> CONTAINER ID   IMAGE                    COMMAND                  CREATED       STATUS       PORTS                            NAMES
+> 4a594eb49d2d   nginx:1.21.3-alpine      "/docker-entrypoint.…"   2 hours ago   Up 2 hours   80/tcp, 0.0.0.0:8000->8000/tcp   django_mysql_nginx_web_1
+> 5ac6a5c370d0   django_mysql_nginx_app   "uwsgi --socket :800…"   2 hours ago   Up 2 hours   8001/tcp                         django_mysql_nginx_app_1
+> 55c685e2015c   django_mysql_nginx_db    "docker-entrypoint.s…"   2 hours ago   Up 2 hours   3306/tcp, 33060/tcp              django_mysql_nginx_db_1
+
+この場合、`55c685e2015c`。以降のコマンドは`docker ps`で得られたMySQLのコンテナIDを当てはめて実行。
+
+
+
+#### Start
+
+```bash
+docker exec -it __container_id__ mysql.server start
+```
+
+
+
+#### Login
+
+```bash
+docker exec -it __container_id__ mysql -u django_user -p
+```
+
+pswdはsettings.pyにある値(`secret`)。
+
+
+
+#### Backup
+
+```bash
+docker exec __container_id__ mysqldump -u root -p'secret' service_id > files/sqls/service_id_full.sql
+```
+
+
+
+#### Restore
+
+```bash
+docker exec __container_id__ mysql -u root -p'secret' service_id < files/sqls/service_id_full.sql
+```
+
+
+
+
+
+## Refference
+
+https://note.com/digiangler777/n/n5af9bf35b0c0
 
