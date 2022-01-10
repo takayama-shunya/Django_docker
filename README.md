@@ -17,13 +17,13 @@ git clone https://gitlab.com/ecbatana-tsukuba/service_id/service-id-on-docker.gi
 ```
 
 2. PCが`M1 Mac`ではない場合、`docker-compose.yml`の5行目`platform: linux/x86_64`を削除。
-3. Dockerでプロジェクトを立ち上げる
+3. ターミナルでDockerでプロジェクトを立ち上げる
 
 ```
 docker-compose up
 ```
 
-4. `service_id_docker_db`のコンテナIDを確認する。IDは起動毎に変わるので注意。
+4. ターミナルから`service_id_docker_db`のコンテナIDを確認する。IDは起動毎に変わるので注意。
 
 ```
 docker ps
