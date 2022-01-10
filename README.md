@@ -8,6 +8,68 @@ Docker Desktop 4.3.2 (72729)
 
 
 
+## Quick Start
+
+1. クローン
+
+```
+git clone https://gitlab.com/ecbatana-tsukuba/service_id/service-id-on-docker.git
+```
+
+2. PCが`M1 Mac`ではない場合、`docker-compose.yml`の5行目`platform: linux/x86_64`を削除。
+3. Dockerでプロジェクトを立ち上げる
+
+```
+docker-compose up
+```
+
+4. `service_id_docker_db`のコンテナIDを確認する。IDは起動毎に変わるので注意。
+
+```
+docker ps
+```
+
+> CONTAINER ID   IMAGE                    COMMAND                  CREATED       STATUS       PORTS                            NAMES
+> f59768399bea   nginx:1.21.3-alpine      "/docker-entrypoint.…"   2 hours ago   Up 2 hours   80/tcp, 0.0.0.0:8000->8000/tcp   service_id_docker_web_1
+> fb7b45725896   service_id_docker_root   "uwsgi --socket :800…"   2 hours ago   Up 2 hours   8001/tcp                         service_id_docker_root_1
+> 43103b4dce62   service_id_docker_db     "docker-entrypoint.s…"   2 hours ago   Up 2 hours   3306/tcp, 33060/tcp              service_id_docker_db_1
+>
+>  ^ this  
+
+
+
+5. DockerのMySQLにログイン。
+   - `__container_id__`は先に確認したものに置換。
+   - PSWDは`secret`。
+
+```
+docker exec -it __container_id__ mysql -u root -p
+```
+
+
+
+6. 以下を実行&MySQLから出る
+
+```sql
+drop database service_id;
+create database service_id;
+use service_id;
+exit
+```
+
+
+
+7. DockerのMySQLにテーブルとレコードをリストア。
+   - `__container_id__`は先に確認したものに置換。
+
+```bash
+docker exec __container_id__ mysql -u root -p'secret' service_id < files/sqls/service_id_full.sql
+```
+
+Quick設定完了。
+
+
+
 ## Setup Files
 
 ### Directory
@@ -389,7 +451,7 @@ docker exec -it __container_id__ mysql.server start
 #### Login
 
 ```bash
-docker exec -it __container_id__ mysql -u django_user -p
+docker exec -it __container_id__ mysql -u root -p
 ```
 
 pswdはsettings.pyにある値(`secret`)。
