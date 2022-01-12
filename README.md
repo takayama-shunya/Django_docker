@@ -36,6 +36,14 @@ docker exec -it 112af68fbe84 mysql -u root
 
 
 
+#### PS
+
+```
+docker exec -it 39491dbeef8b  mysql -u root -p
+```
+
+
+
 #### Restore
 
 ```
