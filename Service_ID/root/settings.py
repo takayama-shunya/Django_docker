@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-from django.db import connection
+# from django.db import connection
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
