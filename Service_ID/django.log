@@ -465,3 +465,27 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.8/site-packages/django/contrib/sessions/backends/base.py", line 50, in __getitem__
     return self._session[key]
 KeyError: 'context'
+[DEBUG]	2022-01-12 15:35:07,897	service_stock_form	[serv_name] 婚姻届	process:9	thread:281472983924352
+[DEBUG]	2022-01-12 15:35:07,931	service_stock_form	[name] 婚姻届	process:9	thread:281472983924352
+[DEBUG]	2022-01-12 15:35:08,058	service_stock_form	[serv_name] 婚姻届	process:9	thread:281472983924352
+[DEBUG]	2022-01-12 15:35:08,060	service_stock_form	[_type] {'_type': 'serv_name'}	process:9	thread:281472983924352
+[DEBUG]	2022-01-12 15:35:08,061	service_stock_form	[serv_items] ['神奈川県相模原市', '氏名']	process:9	thread:281472983924352
+[ERROR]	2022-01-12 15:35:08,278	log	Internal Server Error: /peace_keeping/validate_serv/	process:9	thread:281472983924352
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/generic/base.py", line 101, in dispatch
+    return handler(request, *args, **kwargs)
+  File "./peace_keeping/views/create_service_stock.py", line 32, in post
+    serv_name, serv_items = ServiceStockForm.clean_fields(request.POST)
+  File "./peace_keeping/forms/service_stock_form.py", line 26, in clean_fields
+    serv_items = cls._clean_serv_items(inputs)
+  File "./peace_keeping/forms/service_stock_form.py", line 58, in _clean_serv_items
+    serv_item = Service_Item.objects.filter(phrase=_serv_item).get()
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/query.py", line 439, in get
+    raise self.model.DoesNotExist(
+words.models.service_item.Service_Item.DoesNotExist: Service_Item matching query does not exist.
