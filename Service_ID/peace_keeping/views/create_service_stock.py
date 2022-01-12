@@ -21,7 +21,9 @@ class CreateServiceStock(View):
             'area_name': kwargs['area_name'],
             'base_url': Service_Stock.get_base_url(request),
             'serv_items': {0: ServiceItemForm()},
+            'phrase': None,
         }
+        logger.debug('[context] {}'.format(context))
         return render(request, 'peace_keeping/service_stock/create_serv.html', context)
 
 

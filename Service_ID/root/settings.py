@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_seed',
     'django_boost',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'words.apps.WordsConfig',
     'offices.apps.OfficesConfig',
     'restore_order.apps.RestoreOrderConfig',
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'root.urls'
@@ -139,11 +139,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), PROJECT_DIR_NAME, 'static')
-README_DIR = os.path.join(os.path.dirname(BASE_DIR), PROJECT_DIR_NAME, "README.md")
+STATIC_ROOT = [
+    os.path.join(BASE_DIR, PROJECT_DIR_NAME, 'static'),
+]
 
-IS_ON_LOG_FILE = False
-
+IS_ON_LOG_FILE = True
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -190,4 +190,18 @@ LOGGING = {
         'handlers': ['console', 'file'] if IS_ON_LOG_FILE else ['console'],
         'level': 'DEBUG',
     },
+    # 'loggers': {
+    #     '*': {
+    #         'handlers': ['console'],
+    #         'level': 'DEBUG',
+    #         'propagate': True,
+    #     }
+    # },
+    # 'loggers': {
+    #     'django': {
+    #         'handlers': ['console'],
+    #         'level': 'DEBUG',
+    #         'propagate': False,
+    #     },
+    # },
 }

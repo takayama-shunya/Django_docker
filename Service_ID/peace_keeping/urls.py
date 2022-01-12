@@ -13,7 +13,7 @@ urlpatterns = [
     path('register_serv/', RegisterServiceStock.as_view(), name='register_serv'),
     # -----
     path('get_needs/<str:area_name>/', GetNeeds.as_view(), name='get_needs'),
-    path('fuzzy_search/<str:area_name>/<str:phrase>/', FuzzySearch.as_view(), name='get_needs'),
+    path('fuzzy_search/<str:area_name>/<str:phrase>/', FuzzySearch.as_view(), name='fuzzy_search'),
     path('show_serv/', ShowServiceStock.as_view(), name='show_serv'),
     path('validate_used_serv/', ValidateUsedService.as_view(), name='validate_used_serv'),
     path('confirm_used_serv/', ConfirmUsedService.as_view(), name='confirm_used_serv'),

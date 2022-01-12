@@ -18,6 +18,7 @@
 --
 -- Table structure for table `auth_group`
 --
+
 CREATE DATABASE IF NOT EXISTS `service_id`;
 
 DROP TABLE IF EXISTS `auth_group`;

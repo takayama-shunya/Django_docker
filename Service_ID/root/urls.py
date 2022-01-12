@@ -26,7 +26,7 @@ urlpatterns = [
     path('peace_keeping/', include('peace_keeping.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += [
-        path('__debug__/', include(debug_toolbar.urls))
-    ]
+# if settings.DEBUG:
+#     urlpatterns += [
+#         path('__debug__/', include(debug_toolbar.urls))
+#     ]

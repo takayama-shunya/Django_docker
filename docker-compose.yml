@@ -7,6 +7,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - db-store:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
 
   web:
     image: nginx:1.21.3-alpine
@@ -23,6 +24,7 @@ services:
   root:
     build: ./docker/python
     command: uwsgi --socket :8001 --module root.wsgi --py-autoreload 1 --logto /tmp/tmp.log
+#    command: uwsgi --socket :8001 --module root.wsgi --py-autoreload 1
     volumes:
       - ./Service_ID:/workspace
     expose:

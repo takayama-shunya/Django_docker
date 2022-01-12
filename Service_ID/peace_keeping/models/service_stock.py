@@ -48,8 +48,8 @@ class Service_Stock(models.Model):
             raise ValueError(txt.format(serv_names))
 
     @classmethod
-    def get_base_url(cls,request):
-        _base_url = 'http://' + request.META.get('REMOTE_ADDR')
+    def get_base_url(cls, request):
+        _base_url = 'http://' + request.META.get('REMOTE_ADDR') if not settings.DEBUG else 'http://127.0.0.1'
         base_url = _base_url if not settings.DEBUG else _base_url + ':' + request.META['SERVER_PORT']
         logging.debug('[base_url] {}'.format(base_url))
         return base_url

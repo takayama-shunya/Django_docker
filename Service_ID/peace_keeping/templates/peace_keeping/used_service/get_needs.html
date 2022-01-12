@@ -14,11 +14,11 @@
         </div>
         <div class="fieldWrapper">
             {% if serv_stock.errors %}
-                <ul>
-                    {% for error in serv_stock.non_field_errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
+            <ul>
+                {% for error in serv_stock.non_field_errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
             {% endif %}
             {% include 'peace_keeping/used_service/modules/_fuzzy_search.html' %}
         </div>
@@ -28,7 +28,7 @@
     </fieldset>
 </form>
 
-{% include "peace_keeping/used_service/modules/cdns.html" %}
+{% include "peace_keeping/used_service/modules/../modules/cdns.html" %}
 <script src="{% static 'peace_keeping/javascript/fuzzy_search.js' %}"></script>
 </body>
 </html>

@@ -6,18 +6,81 @@
 
 Docker Desktop 4.3.2 (72729) 
 
+### install Docker
+
+#### Windows
+
+
+
+```
+ wsl --install -d Ubuntu-20.04
+ 
+```
+
+
+
+演算子 '<' は、今後の使用のために予約されています。
+
+```
+cmd
+
+```
+
+
+
+#### Create DB
+
+```
+docker exec -it 112af68fbe84 mysql -u root
+```
+
+
+
+#### Restore
+
+```
+docker exec 7081ca8b632a mysql --defaults-extra-file=files/sqls/sql_access.cnf service_id < files/sqls/service_id_full.sql
+```
+
+
+
+```
+docker exec 7081ca8b632a mysql -u root -p files/sqls/pswd.cnf service_id < files/sqls/service_id_full.sql
+```
+
+
+
+```
+docker exec 112af68fbe84  mysql -u root -p"secret" service_id < files/sqls/service_id_full.sql
+```
+
+
+
+```
+docker exec 112af68fbe84  mysql -u root service_id < files/sqls/service_id_full.sql
+```
+
 
 
 ## Quick Start
 
 1. クローン
 
-```
+```bash
 git clone https://gitlab.com/ecbatana-tsukuba/service_id/service-id-on-docker.git
 ```
 
-2. PCが`M1 Mac`ではない場合、`docker-compose.yml`の5行目`platform: linux/x86_64`を削除。
-3. ターミナルでDockerでプロジェクトを立ち上げる
+2. プロジェクトディレクトリに移動
+
+   ```bash
+   cd service-id-on-docker
+   ```
+
+   
+
+3. PCが`M1 Mac`ではない場合、`docker-compose.yml`の5行目`platform: linux/x86_64`を削除。
+
+4. ターミナルでDockerでプロジェクトを立ち上げる
 
 ```
 docker-compose up
@@ -52,10 +115,9 @@ docker exec -it __container_id__ mysql -u root -p
 6. 以下を実行&MySQLから出る
 
 ```sql
-drop database service_id;
 create database service_id;
 use service_id;
-exit
+exit;
 ```
 
 
@@ -273,7 +335,7 @@ uwsgi_param  SERVER_NAME        $server_name;
 ```
 upstream django {
   ip_hash;
-  server app:8001;
+  server root:8001;
 }
 
 server {
@@ -365,7 +427,7 @@ http://localhost:8000
 ゼロからプロジェクトをDocker内に作る場合。
 
 ```bash
-docker-compose exec app django-admin.py startproject app .
+docker-compose exec root django-admin.py startproject root .
 ```
 
 
@@ -389,7 +451,7 @@ docker-compose restart
 `migrate`
 
 ```bash
-docker-compose exec app ./manage.py migrate
+docker-compose exec root ./manage.py migrate
 ```
 
 
@@ -397,7 +459,7 @@ docker-compose exec app ./manage.py migrate
 `collectstatic`
 
 ```bash
-
+docker-compose exec root ./manage.py collectstatic
 ```
 
 
@@ -434,7 +496,7 @@ docker ps
 
 > CONTAINER ID   IMAGE                    COMMAND                  CREATED       STATUS       PORTS                            NAMES
 > 4a594eb49d2d   nginx:1.21.3-alpine      "/docker-entrypoint.…"   2 hours ago   Up 2 hours   80/tcp, 0.0.0.0:8000->8000/tcp   django_mysql_nginx_web_1
-> 5ac6a5c370d0   django_mysql_nginx_app   "uwsgi --socket :800…"   2 hours ago   Up 2 hours   8001/tcp                         django_mysql_nginx_app_1
+> 5ac6a5c370d0   django_mysql_nginx_root   "uwsgi --socket :800…"   2 hours ago   Up 2 hours   8001/tcp                         django_mysql_nginx_root_1
 > 55c685e2015c   django_mysql_nginx_db    "docker-entrypoint.s…"   2 hours ago   Up 2 hours   3306/tcp, 33060/tcp              django_mysql_nginx_db_1
 
 この場合、`55c685e2015c`。以降のコマンドは`docker ps`で得られたMySQLのコンテナIDを当てはめて実行。

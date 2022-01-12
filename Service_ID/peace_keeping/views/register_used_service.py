@@ -26,6 +26,7 @@ class GetNeeds(View):
 class FuzzySearch(View):
     def get(self, request, *args, **kwargs):
         phrases = [s_s.serv_name.phrase for s_s in Service_Stock.fuzzy_search(kwargs['phrase'], kwargs['area_name'])]
+        logger.debug('[phrases] {}'.format(phrases))
         return HttpResponse(','.join(phrases))
 
 
