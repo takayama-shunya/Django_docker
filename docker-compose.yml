@@ -5,9 +5,12 @@ services:
     platform: linux/x86_64 # M1チップ対応のため追記
     build: ./docker/mysql
     command: --default-authentication-plugin=mysql_native_password
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_ROOT_PASSWORD: secret
     volumes:
-      - db-store:/var/lib/mysql
-      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
+#      - db-store:/var/lib/mysql
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d/
 
   web:
     image: nginx:1.21.3-alpine
