@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Get Needs</title>
+    {% include "peace_keeping/modules/cdns.html" %}
 </head>
 <body>
 <form name="get_needs" action="{% url 'peace_keeping:show_serv' %}" method="post" autocomplete="off">
@@ -20,15 +21,12 @@
                 {% endfor %}
             </ul>
             {% endif %}
-            {% include 'peace_keeping/used_service/modules/_fuzzy_search.html' %}
+            {% include 'peace_keeping/modules/fuzzy_search.html' %}
         </div>
         <div>
             <input type="submit" value="submit">
         </div>
     </fieldset>
 </form>
-
-{% include "peace_keeping/used_service/modules/../modules/cdns.html" %}
-<script src="{% static 'peace_keeping/javascript/fuzzy_search.js' %}"></script>
 </body>
 </html>
