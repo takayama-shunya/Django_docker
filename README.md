@@ -84,6 +84,18 @@ docker-compose up
 
 
 
+### Log
+
+Dockerで動かしているプロジェクトは、コンソールでログを表示できないので、debug_toolbarのタブを開いてログを表示する。
+
+![toolbar_1](Service_ID/files/images/debug_toolbar_3.png)
+
+
+
+
+
+
+
 ## Setup Files
 
 ### Directory
@@ -393,9 +405,9 @@ docker-compose up
 
 ### Access
 
-http://localhost:8000
+http://localhost:8000/admin
 
-プロジェクトがない場合は作成後にアクセス。
+プロジェクトがない場合は作成後に上記にアクセス。
 
 
 
