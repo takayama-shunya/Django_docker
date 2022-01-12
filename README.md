@@ -24,7 +24,7 @@ Windows10ユーザーは最初に以下を実行のこと。
 
 1. BIOSの設定を変更。`再起動 -> [DELETE]key長押し`で以下のような画面に入り、CPUの設定を変える。`Intel Virtualization Technology`を`enabled`にするなど。==BIOSによって表現が違う可能性があるので注意。==
 
-![BIOS](Service_ID/files/images/BIOS.jpg)
+![BIOS](./Service_ID/files/images/BIOS.jpg)
 
 
 
