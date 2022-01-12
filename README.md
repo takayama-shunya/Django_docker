@@ -4,73 +4,44 @@
 
 ## Version
 
-Docker Desktop 4.3.2 (72729) 
+荒川が利用：*Docker Desktop 4.3.2 (72729)* 
 
-### install Docker
-
-#### Windows
-
-
-
-```
- wsl --install -d Ubuntu-20.04
- 
-```
-
-
-
-演算子 '<' は、今後の使用のために予約されています。
-
-```
-cmd
-
-```
-
-
-
-#### Create DB
-
-```
-docker exec -it 112af68fbe84 mysql -u root
-```
-
-
-
-#### PS
-
-```
-docker exec -it 39491dbeef8b  mysql -u root -p
-```
-
-
-
-#### Restore
-
-```
-docker exec 7081ca8b632a mysql --defaults-extra-file=files/sqls/sql_access.cnf service_id < files/sqls/service_id_full.sql
-```
-
-
-
-```
-docker exec 7081ca8b632a mysql -u root -p files/sqls/pswd.cnf service_id < files/sqls/service_id_full.sql
-```
-
-
-
-```
-docker exec 112af68fbe84  mysql -u root -p"secret" service_id < files/sqls/service_id_full.sql
-```
-
-
-
-```
-docker exec 112af68fbe84  mysql -u root service_id < files/sqls/service_id_full.sql
-```
+以降の手続き中に不具合が生じる場合はDockerのバージョンを合わせてください。
 
 
 
 ## Quick Start
+
+### Download Docker
+
+https://www.docker.com/get-started
+
+
+
+### Only for Windows
+
+Windows10ユーザーは最初に以下を実行のこと。
+
+1. BIOSの設定を変更。`再起動 -> [DELETE]key長押し`で以下のような画面に入り、CPUの設定を変える。`Intel Virtualization Technology`を`enabled`にするなど。==BIOSによって表現が違う可能性があるので注意。==
+
+![BIOS](Service_ID/files/images/BIOS.jpg)
+
+
+
+2. Ubuntu をインストール
+
+```
+wsl --install -d Ubuntu-20.04
+wsl --set-version Ubuntu-20.04 2
+```
+
+
+
+
+
+### For Mac & Windows
+
+Windowsの場合、`Only for Windows`を完了後、以下を実行。
 
 1. クローン
 
@@ -80,9 +51,9 @@ git clone https://gitlab.com/ecbatana-tsukuba/service_id/service-id-on-docker.gi
 
 2. プロジェクトディレクトリに移動
 
-   ```bash
-   cd service-id-on-docker
-   ```
+```bash
+cd service-id-on-docker
+```
 
    
 
@@ -90,54 +61,12 @@ git clone https://gitlab.com/ecbatana-tsukuba/service_id/service-id-on-docker.gi
 
 4. ターミナルでDockerでプロジェクトを立ち上げる
 
-```
+```bash
+docker-compose build
 docker-compose up
 ```
 
-4. ターミナルから`service_id_docker_db`のコンテナIDを確認する。IDは起動毎に変わるので注意。
-
-```
-docker ps
-```
-
-> CONTAINER ID   IMAGE                    COMMAND                  CREATED       STATUS       PORTS                            NAMES
->
-> f59768399bea   nginx:1.21.3-alpine      "/docker-entrypoint.…"   2 hours ago   Up 2 hours   80/tcp, 0.0.0.0:8000->8000/tcp   service_id_docker_web_1
->
-> fb7b45725896   service_id_docker_root   "uwsgi --socket :800…"   2 hours ago   Up 2 hours   8001/tcp                         service_id_docker_root_1
->
-> 43103b4dce62   service_id_docker_db     "docker-entrypoint.s…"   2 hours ago   Up 2 hours   3306/tcp, 33060/tcp              service_id_docker_db_1
-
-
-
-5. DockerのMySQLにログイン。
-   - `__container_id__`は先に確認したものに置換。
-   - PSWDは`secret`。
-
-```
-docker exec -it __container_id__ mysql -u root -p
-```
-
-
-
-6. 以下を実行&MySQLから出る
-
-```sql
-create database service_id;
-use service_id;
-exit;
-```
-
-
-
-7. DockerのMySQLにテーブルとレコードをリストア。
-   - `__container_id__`は先に確認したものに置換。
-
-```bash
-docker exec __container_id__ mysql -u root -p'secret' service_id < files/sqls/service_id_full.sql
-```
-
-Quick設定完了。
+設定完了。
 
 
 
@@ -149,6 +78,8 @@ Quick設定完了。
 django-app
 ├── docker-compose.yml
 ├── mysql
+│   ├── initdb.d
+│   |   └── init.sql
 │   ├── Dockerfile
 │   └── my.cnf
 └── python
@@ -175,6 +106,8 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - db-store:/var/lib/mysql
+      # MySQLにDBを生成してテーブル・レコードをリストア
+      - ./docker/mysql/initdb.d/:/docker-entrypoint-initdb.d
 
   web:
     image: nginx:1.21.3-alpine
@@ -258,6 +191,29 @@ xlwt==1.3.0
 
 
 ### MySQL
+
+#### `mysql/initdb.d/init.sql`
+
+ここで`create`と`use`をしていなかったので`docker-entrypoint-initdb.d`をしてもDBのセットアップが完了できなかった。
+
+```sql
+/* add create database and use service_id  */
+CREATE DATABASE IF NOT EXISTS `service_id`;
+use `service_id`;
+
+/* existing query by sqldump below */
+DROP TABLE IF EXISTS `auth_group`;
+CREATE TABLE `auth_group` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+```
+
+
+
+
 
 #### `mysql/Dockerfile`
 
@@ -368,15 +324,14 @@ server_tokens off;
 
 `settings.py`
 
-- `mysql/Dockerfile`で設定した値と合わせるように設定されている。
-- `NAME`と`USER`の変更が必要な場合は、`docker-compose build` `docker-compose up`を実行した後に両者を変更。
+- `docker-entrypoint-initdb.d`でDB`sevice_id`が生成されているのでこの設定でいける。
 
 ```python
 DATABASES = {
   'default': {
   'ENGINE': 'django.db.backends.mysql',
-  'NAME': 'django_local',
-  'USER': 'django_user',
+  'NAME': 'service_id',
+  'USER': 'root',
   'PASSWORD': 'secret',
   'HOST': 'db',
   'POST': 3306
@@ -475,26 +430,6 @@ docker-compose exec root ./manage.py collectstatic
 
 
 ### MySQL
-
-- DjangoとMySQLを組み合わせてDockerで扱う場合、`settings.py`での初期設定は以下。
-- `NAME`と`USER`の変更が必要な場合は、`docker-compose build` `docker-compose up`を実行した後に両者を変更。
-
-##### After
-
-```python
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'service_id', # here
-        'USER': 'root',       # here
-        'PASSWORD': 'secret',
-        'HOST': 'db',
-        'POST': 3306
-    }
-}
-```
-
-
 
 #### コンテナIDを確認
 
