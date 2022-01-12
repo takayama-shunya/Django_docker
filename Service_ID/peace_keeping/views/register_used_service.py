@@ -40,7 +40,7 @@ class ShowServiceStock(View):
         serv_name = request.POST['serv_name']
         area = Area.objects.get(name=request.POST['area_name'])
         logger.debug('[serv_name] {}'.format(serv_name))
-        serv_id = Service_Stock.objects.filter(area=area).get(serv_name__phrase=serv_name).serv_id
+        serv_id = Service_Stock.objects.filter(area=area, serv_name__phrase=serv_name).order_by('ver').last().serv_id
         decoded_serv_id = Decode.to_4_els_list(serv_id)
         phrase_val_list = Formatter.get_phrase_val_list(*decoded_serv_id)
         context = {

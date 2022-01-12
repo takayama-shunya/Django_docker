@@ -40,7 +40,7 @@ class Service_Stock(models.Model):
         for serv_name in serv_names:
             query = Service_Stock.objects.filter(serv_name=serv_name, area__name=area_name)
             if query.exists():
-                serv_stocks.append(query.get())
+                serv_stocks.append(query.order_by('ver').last())
         if len(serv_stocks) > 0:
             return serv_stocks
         else:
