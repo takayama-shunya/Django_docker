@@ -22,18 +22,32 @@ https://www.docker.com/get-started
 
 Windows10ユーザーは最初に以下を実行のこと。
 
-1. BIOSの設定を変更。`再起動 -> [DELETE]key長押し`で以下のような画面に入り、CPUの設定を変える。`Intel Virtualization Technology`を`enabled`にするなど。==BIOSによって表現が違う可能性があるので注意。==
+1. powershellを**管理者として**起動して以下を実行。
 
-![BIOS](./Service_ID/files/images/BIOS.jpg)
+```powershell
+wsl --install
+```
 
 
 
-2. Ubuntu をインストール
-
+2. Ubuntuをインストール
 ```
 wsl --install -d Ubuntu-20.04
-wsl --set-version Ubuntu-20.04 2
+wsl --set-default-version 2
 ```
+
+   
+
+3. 設定 > `有効化`で検索して`Windowsの機能の有効化または無効化`
+   - Hype-V ：チェックoff	
+   - Linux用Windows サブシステム（表記違う可能性あり）：チェックoff
+   - 仮想マシンプラットフォーム：チェックoff
+
+4. Dockerを起動する。ここで起動が失敗する場合は以下を実行。
+
+5. BIOSの設定を変更。`再起動 -> [DELETE]key長押し`(メーカーによってキーが異なるので確認のこと)で以下のような画面に入り、CPUの設定を変える。`Intel Virtualization Technology`を`enabled`にするなど。==BIOSによって表現が違う可能性があるので注意。==
+
+![BIOS](./Service_ID/files/images/BIOS.jpg)
 
 
 
