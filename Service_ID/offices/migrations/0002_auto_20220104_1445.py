@@ -8,7 +8,7 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('auth', '0015_alter_user_email'),
+        ('auth', '0013_alter_user_email'),
         ('offices', '0001_initial'),
     ]
 
