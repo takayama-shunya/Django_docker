@@ -18,6 +18,7 @@ class Service_Stock(models.Model):
     core_items_serial = models.CharField(max_length=255)
     opt_serv_id = models.CharField(max_length=255, blank=True, null=True)
     opt_items_serial = models.CharField(max_length=255, blank=True, null=True)
+    ex_serv_id = models.CharField(unique=True, max_length=255, null=True, blank=True)
     area = models.ForeignKey(Area, to_field='code', on_delete=models.DO_NOTHING)
     ver = models.IntegerField()
     created_at = models.DateTimeField(default=timezone.now)
@@ -77,6 +78,31 @@ class Service_Stock(models.Model):
             serv_stock.ver = ver
             serv_stock.serv_id = Encode.from_4_els([core_serv_id, custom_serv_id, area_instance.code, ver])
             serv_stock.save()
+            return serv_stock.serv_id
+        else:
+            raise Exception('このサービスIDはすでに登録されています。[{}]'.format(_serv_id))
+
+    @classmethod
+    def update_save_serv_stock(cls, serv_name: str, area_name: str, core_items=[], opt_items=[], ver=1, ex_serv_id = None) -> str:
+        core_serv_id = Encode.core_serv_id(core_items)
+        custom_serv_id = Encode.opt_serv_id(opt_items)
+        area_instance = Area.objects.get(name=area_name)
+        _ex_serv_id = ex_serv_id
+        _serv_id = Encode.from_4_els([core_serv_id, custom_serv_id, area_instance.code, ver])
+        if not Service_Stock.objects.filter(serv_id__exact=_serv_id).exists():
+            serv_stock = Service_Stock()
+            serv_stock.serv_name = Service_Name.objects.filter(phrase__exact=serv_name).get()
+            serv_stock.core_serv_id = core_serv_id
+            serv_stock.core_items_serial = '|'.join(core_items)
+            serv_stock.opt_serv_id = custom_serv_id
+            serv_stock.opt_items_serial = '|'.join(opt_items)
+            serv_stock.ex_serv_id = ex_serv_id
+            serv_stock.area = area_instance
+            serv_stock.ver = ver
+            serv_stock.serv_id = Encode.from_4_els([core_serv_id, custom_serv_id, area_instance.code, ver])
+            serv_stock.save()
+            pre_serv_stock = Service_Stock.objects.filter(serv_id__exact=ex_serv_id).get()
+            #pre_serv_stock.delete()
             return serv_stock.serv_id
         else:
             raise Exception('このサービスIDはすでに登録されています。[{}]'.format(_serv_id))
