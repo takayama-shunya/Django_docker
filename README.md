@@ -72,8 +72,7 @@ cd service-id-on-docker
    
 
 3. PCが`M1 Mac`ではない場合、`docker-compose.yml`の5行目`platform: linux/x86_64`を削除。
-
-4. ターミナルでDockerでプロジェクトを立ち上げる
+4. Dockerを起動後、ターミナルでDockerのプロジェクトを立ち上げる
 
 ```bash
 docker-compose build
@@ -143,6 +142,7 @@ services:
       - ./Service_ID:/workspace
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./docker/nginx/uwsgi_params:/etc/nginx/uwsgi_params
+      - ./Service_ID/static:/static
     working_dir: /workspace
     depends_on:
       - root
@@ -322,6 +322,8 @@ uwsgi_param  SERVER_NAME        $server_name;
 
 `nginx/default.conf `
 
+`static`を参照するための`alias`の設定を追加。[Refference](https://rurukblog.com/post/dockercompose-nginx-django-mysql/)
+
 ```
 upstream django {
   ip_hash;
@@ -333,6 +335,11 @@ server {
   server_name 127.0.0.1;
   charset     utf-8;
 
+  // for static files setting
+  location /static {
+	alias /static;
+  }
+  
   location / {
     uwsgi_pass  django;
     include     /etc/nginx/uwsgi_params;
@@ -344,7 +351,7 @@ server_tokens off;
 
 
 
-### 
+
 
 ### Django
 
