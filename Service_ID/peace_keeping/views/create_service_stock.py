@@ -24,7 +24,7 @@ class CreateServiceStock(View):
             'phrase': None,
         }
         logger.debug('[context] {}'.format(context))
-        return render(request, 'peace_keeping/service_stock/create_serv.html', context)
+        return render(request, 'peace_keeping/service_stock/create_serv/create_serv.html', context)
 
 
 class ValidateServiceStock(View):
@@ -45,4 +45,4 @@ class RegisterServiceStock(View):
     def get(self, request, *args, **kwargs):
         logger.debug('[RegisterServiceStock() request.session["context"]] {}'.format(request.session['context']))
         context = request.session['context']
-        return render(request, 'peace_keeping/service_stock/register_serv.html', context)
+        return render(request, 'peace_keeping/service_stock/create_serv/register_serv.html', context)
