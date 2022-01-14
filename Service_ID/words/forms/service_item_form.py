@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 class ServiceItemForm(forms.Form):
     phrase = forms.CharField(min_length=1, max_length=20)
-    is_app_con = forms.BooleanField(required=False)
+    is_app_con = forms.BooleanField(required=False, initial=False)
 
     def __init__(self, *args, **kwd):
         super(ServiceItemForm, self).__init__(*args, **kwd)
@@ -21,6 +21,8 @@ class ServiceItemForm(forms.Form):
         }
 
     def validate(self):
+        self.is_valid()
+        data_list = self.cleaned_data
         data = self.cleaned_data['phrase']
         is_exists = Service_Item.objects.filter(phrase__exact=data).exists()
         logger.debug('[item] {} is_exists {}'.format(data, is_exists))
@@ -39,4 +41,4 @@ class ServiceItemForm(forms.Form):
                     pass
         else:
             raise forms.ValidationError('この表現は非標準として登録されていません。')
-        return data
+        return data_list

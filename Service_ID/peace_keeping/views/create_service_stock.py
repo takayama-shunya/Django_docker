@@ -7,6 +7,8 @@ from ..models import Service_Stock
 from ..forms import ServiceStockForm
 from words.forms import ServiceItemForm
 import logging
+from words.models import Service_Item
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -17,13 +19,16 @@ def index(request):
 
 class CreateServiceStock(View):
     def get(self, request, *args, **kwargs):
+        serv_items = Service_Item.objects.filter(is_app_con=True)
         context = {
             'area_name': kwargs['area_name'],
             'base_url': Service_Stock.get_base_url(request),
             'serv_items': {0: ServiceItemForm()},
+            'app_cons': json.dumps([serv_item.phrase for serv_item in serv_items]),
             'phrase': None,
         }
         logger.debug('[context] {}'.format(context))
+        logger.warn('プロトタイプでは一度表示されたセレクトボックスは非表示にならない仕様になっています。')
         return render(request, 'peace_keeping/service_stock/create_serv/create_serv.html', context)
 
 

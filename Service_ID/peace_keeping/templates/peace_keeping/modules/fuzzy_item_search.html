@@ -1,13 +1,13 @@
-<div id="fuzzy-search">
+<div id="fuzzy-item-search">
     <h2>{{ area_name }}
         <input type="hidden" name="area_name" value="{{ area_name }}" ref="area_name">
         <input type="hidden" value="{{ base_url }}" ref="base_url">
     </h2>
     <div class="parent">
-        <span>届出名orご用件：</span>
+{#        <span>届出名orご用件：</span>#}
         <input type="text"
-               name="serv_name"
-               v-model="serv_name_or_needs"
+               name="serv_item"
+               v-model="serv_item"
                v-on:keyup="getCandidates()"
                ref="input"
                required>
@@ -30,9 +30,9 @@
 <script>
     var fuzzy_search = new Vue({
         delimiters: ["[[", "]]"],
-        el: '#fuzzy-search',
+        el: '#fuzzy-item-search',
         data: {
-            serv_name_or_needs: '',
+            serv_item: '',
             area_name: '',
             candidates: [],
             errored: false,
@@ -43,7 +43,7 @@
         },
         methods: {
             getCandidates: function () {
-                const url = this.base_url + '/peace_keeping/fuzzy_search' + '/' + this.area_name + '/' + this.serv_name_or_needs
+                const url = this.base_url + '/peace_keeping/fuzzy_search' + '/' + this.area_name + '/' + this.serv_item
                 console.log(url)
                 axios.get(url)
                     .then(response => {

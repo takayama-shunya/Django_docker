@@ -1,4 +1,4 @@
-<div id="fuzzy-search">
+<div id="fuzzy-name-search">
     <h2>{{ area_name }}
         <input type="hidden" name="area_name" value="{{ area_name }}" ref="area_name">
         <input type="hidden" value="{{ base_url }}" ref="base_url">
@@ -30,7 +30,7 @@
 <script>
     var fuzzy_search = new Vue({
         delimiters: ["[[", "]]"],
-        el: '#fuzzy-search',
+        el: '#fuzzy-name-search',
         data: {
             serv_name_or_needs: '',
             area_name: '',

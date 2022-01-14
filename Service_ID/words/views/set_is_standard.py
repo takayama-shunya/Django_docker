@@ -42,7 +42,8 @@ class ValidateIsStandard(View):
     def _validate_process(self, request, key, Model, Form):
         form = Form(request.POST)
         if form.is_valid():
-            model_name, resemble = Model.set_is_core_std(form.validate())
+            validated_form = form.validate()
+            model_name, resemble = Model.set_is_core_std(phrase=validated_form['phrase'], is_app_con=validated_form['is_app_con'])
             request.session['context'] = {
                 'model_name': model_name,
                 'resemble': resemble

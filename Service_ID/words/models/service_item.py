@@ -73,10 +73,11 @@ class Service_Item(models.Model):
         return True if len(serv_items) == 1 else False
 
     @classmethod
-    def set_is_core_std(cls, phrase):
+    def set_is_core_std(cls, phrase, is_app_con):
         serv_item = Service_Item.objects.filter(phrase=phrase).get()
         serv_item.is_core_std = True
         serv_item.core_item_id = cls._create_or_get_id(serv_item.phrase, 'c')
+        serv_item.is_app_con = is_app_con
         serv_item.save()
         logger.debug('[set is_core_std] {}'.format(serv_item.phrase))
         return cls.__name__, serv_item.phrase

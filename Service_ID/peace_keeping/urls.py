@@ -8,7 +8,7 @@ app_name = 'peace_keeping'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('error/<str:area_name>/', CreateServiceStock.as_view(), name='error'),
+    path('create_serv/<str:area_name>/', CreateServiceStock.as_view(), name='create_serv'),
     path('validate_serv/', ValidateServiceStock.as_view(), name='validate_serv'),
     path('register_serv/', RegisterServiceStock.as_view(), name='register_serv'),
     # -----
