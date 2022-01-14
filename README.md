@@ -47,7 +47,7 @@ wsl --set-default-version 2
 
 5. BIOSの設定を変更。`再起動 -> [DELETE]key長押し`(メーカーによってキーが異なるので確認のこと)で以下のような画面に入り、CPUの設定を変える。`Intel Virtualization Technology`を`enabled`にするなど。==BIOSによって表現が違う可能性があるので注意。==
 
-![BIOS](./Service_ID/files/images/BIOS.jpg)
+![BIOS](READMEs/files/images/BIOS.jpg)
 
 
 
@@ -87,7 +87,7 @@ docker-compose up
 
 Dockerで動かしているプロジェクトは、コンソールでログを表示できないので、debug_toolbarのタブを開いてログを表示する。
 
-![toolbar_1](Service_ID/files/images/debug_toolbar_3.png)
+![toolbar_1](READMEs/files/images/debug_toolbar_3.png)
 
 
 
