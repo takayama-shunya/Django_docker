@@ -2,11 +2,12 @@ version: "3.8"
 
 services:
   db:
-    platform: linux/x86_64 # M1チップ対応のため追記
+    platform: linux/x86_64 #1 M1チップMac対応のため追記
     build: ./docker/mysql
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - db-store:/var/lib/mysql
+      #2 MySQLにDBを生成してテーブル・レコードをリストア
       - ./docker/mysql/initdb.d/:/docker-entrypoint-initdb.d
 
   web:
