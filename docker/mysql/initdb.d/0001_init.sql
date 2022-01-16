@@ -1,6 +1,3 @@
-DROP DATABASE IF EXISTS `service_id`;
-CREATE DATABASE `service_id`;
-USE `service_id`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Linux (x86_64)
 --
 -- Host: localhost    Database: service_id
