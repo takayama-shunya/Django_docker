@@ -2,6 +2,49 @@
 
 
 
+## 用語
+
+### コンテナ
+
+- コンテナはDockerイメージが起動される場所。
+- 仕組み
+  - 仮想マシンと異なり**ホストカーネルを利用し仮想化を実現**します。
+  - ホストカーネルからはプロセスとして動作し、**他のプロセスと分離**させています。
+  - **システムオーバーヘッドの削減と管理が容易**になる。
+
+
+
+### イメージ
+
+https://and-engineer.com/articles/YaSPjRIAACAAkhMI
+
+- アプリケーション実行に必要な**変数・コマンドやメタデータ**を含みます。
+- Dockerは**Dockerイメージを用いてコンテナ動作させる**ものです。Dockerfileをビルドすることで**Dockerイメージを生成**します。
+
+- **Dockerイメージは静的**なテンプレートファイル。”docker run”でコンテナ内でインスタンス化される。
+- 実行されているコンテナはメモリー上の動的情報（実行インスタンス）となる。実行状態のインスタンスをコンテナと言います。
+
+
+
+### ボリューム
+
+https://qiita.com/gounx2/items/23b0dc8b8b95cc629f32
+
+- ボリュームとは、データを永続化できる場所のこと。
+- `コンテナ` と `ボリューム` の違いについて
+  - コンテナ内部にデータ(ファイル)を保存しても、コンテナ破棄すると消えてしまう。
+  - なので、データを永続化したいときは、コンテナの外(ボリューム)にデータを置く必要がある。
+- `ボリューム`(=データを永続化できる場所) は２種類ある。
+  - ホストのディレクトリ(ファイル)。ホストで `ls` で見えるモノ。
+  - Docker の リソースとしての Volume。`docker volume ls` で見えるモノ。
+  - （本当は、これ以外にもNFSなども指定できるようだ）
+- ボリュームをコンテナにマウントする(`-v`)ことで、コンテナからアクセスできるようになる。
+- あるいは`--volumes-from <コンテナ名>` とすると、指定したコンテナのマウントと同じようにマウントできる。（指定コンテナの `-v` の真似をする）
+
+
+
+
+
 ## Setup
 
 ### Directory
@@ -33,12 +76,11 @@ version: "3.8"
 
 services:
   db:
-    platform: linux/x86_64 #1 M1チップMac対応のため追記
+    platform: linux/x86_64
     build: ./docker/mysql
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - db-store:/var/lib/mysql
-      #2 MySQLにDBを生成してテーブル・レコードをリストア
       - ./docker/mysql/initdb.d/:/docker-entrypoint-initdb.d
 
   web:
@@ -68,9 +110,9 @@ volumes:
   db-store:
 ```
 
-`#1` : M1チップMac以外では削除
+`Line 5` :  `    platform: linux/x86_64` M1チップMac以外では削除
 
-`#2` : `./docker/mysql/initdb.d/`内の`sql`アルファベット順に実行後、 `sh`ファイルをアルファベット順に実行。
+`Line 10` : `./docker/mysql/initdb.d/`内の`sql`アルファベット順に実行後、 `sh`ファイルをアルファベット順に実行。
 
 
 
@@ -269,13 +311,13 @@ server_tokens off;
 
 `settings.py`
 
-- `docker-entrypoint-initdb.d`でDB`sevice_id`が生成されているのでこの設定でいける。
+[//]: # "- `docker-entrypoint-initdb.d`でDB`sevice_id`が生成されているのでこの設定でいける。"
 
 ```python
 DATABASES = {
   'default': {
   'ENGINE': 'django.db.backends.mysql',
-  'NAME': 'service_id',
+  'NAME': 'django_local',
   'USER': 'root',
   'PASSWORD': 'secret',
   'HOST': 'db',
