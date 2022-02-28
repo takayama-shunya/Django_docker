@@ -207,7 +207,7 @@ CREATE TABLE `django_admin_log` (
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_offices_officer_id` FOREIGN KEY (`user_id`) REFERENCES `offices_officer` (`id`),
   CONSTRAINT `django_admin_log_chk_1` CHECK ((`action_flag` >= 0))
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +216,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2022-02-11 04:28:50.750274','6','centralofficer',2,'[{\"changed\": {\"fields\": [\"Staff status\"]}}]',14,1);
+INSERT INTO `django_admin_log` VALUES (1,'2022-02-11 04:28:50.750274','6','centralofficer',2,'[{\"changed\": {\"fields\": [\"Staff status\"]}}]',14,1),(2,'2022-02-28 12:22:41.860063','39','住民異動届',3,'',18,1),(3,'2022-02-28 12:22:41.907563','36','住民異動届',3,'',18,1),(4,'2022-02-28 12:22:41.915768','31','住民異動届',3,'',18,1),(5,'2022-02-28 12:22:41.921591','24','住民異動届',3,'',18,1),(6,'2022-02-28 12:22:41.926892','23','住民異動届',3,'',18,1),(7,'2022-02-28 12:22:41.931486','21','住民異動届',3,'',18,1),(8,'2022-02-28 12:39:15.399335','31','住民異動届',3,'',18,1),(9,'2022-02-28 12:39:15.414628','23','住民異動届',3,'',18,1),(10,'2022-02-28 12:44:36.578657','7','住民異動届',3,'',19,1),(11,'2022-02-28 12:44:36.589385','6','住民異動届',3,'',19,1),(12,'2022-02-28 12:44:46.889029','31','住民異動届',3,'',18,1),(13,'2022-02-28 12:44:46.896553','23','住民異動届',3,'',18,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +259,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +268,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2022-02-11 02:22:05.245056'),(2,'contenttypes','0002_remove_content_type_name','2022-02-11 02:22:05.363182'),(3,'auth','0001_initial','2022-02-11 02:22:06.122329'),(4,'auth','0002_alter_permission_name_max_length','2022-02-11 02:22:06.221909'),(5,'auth','0003_alter_user_email_max_length','2022-02-11 02:22:06.274931'),(6,'auth','0004_alter_user_username_opts','2022-02-11 02:22:06.285024'),(7,'auth','0005_alter_user_last_login_null','2022-02-11 02:22:06.378671'),(8,'auth','0006_require_contenttypes_0002','2022-02-11 02:22:06.389397'),(9,'auth','0007_alter_validators_add_error_messages','2022-02-11 02:22:06.400986'),(10,'auth','0008_alter_user_username_max_length','2022-02-11 02:22:06.497356'),(11,'auth','0009_alter_user_last_name_max_length','2022-02-11 02:22:06.592837'),(12,'auth','0010_alter_group_name_max_length','2022-02-11 02:22:06.640020'),(13,'auth','0011_update_proxy_permissions','2022-02-11 02:22:06.654331'),(14,'auth','0012_alter_user_first_name_max_length','2022-02-11 02:22:06.754824'),(15,'auth','0013_alter_user_email','2022-02-11 02:22:06.819329'),(16,'django_boost','0001_initial','2022-02-11 02:22:06.830232'),(17,'django_boost','0002_auto_20191003_0518','2022-02-11 02:22:06.841222'),(18,'sessions','0001_initial','2022-02-11 02:22:06.907335'),(19,'words','0001_initial','2022-02-11 02:22:07.717674'),(20,'words','0002_alter_item_end_word_alter_item_start_word_and_more','2022-02-11 02:22:08.226446'),(21,'words','0003_item_end_is_merged_item_start_is_merged_and_more','2022-02-11 02:22:08.610530'),(22,'offices','0001_initial','2022-02-11 02:23:16.332038'),(23,'peace_keeping','0001_initial','2022-02-11 02:23:16.986823'),(24,'restore_order','0001_initial','2022-02-11 02:23:17.867004'),(25,'admin','0001_initial','2022-02-11 02:24:00.545351'),(26,'admin','0002_logentry_remove_auto_add','2022-02-11 02:24:00.557641'),(27,'admin','0003_logentry_add_action_flag_choices','2022-02-11 02:24:00.567548'),(28,'offices','0002_alter_officer_options_officer_date_joined_and_more','2022-02-11 02:24:01.755591');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2022-02-11 02:22:05.245056'),(2,'contenttypes','0002_remove_content_type_name','2022-02-11 02:22:05.363182'),(3,'auth','0001_initial','2022-02-11 02:22:06.122329'),(4,'auth','0002_alter_permission_name_max_length','2022-02-11 02:22:06.221909'),(5,'auth','0003_alter_user_email_max_length','2022-02-11 02:22:06.274931'),(6,'auth','0004_alter_user_username_opts','2022-02-11 02:22:06.285024'),(7,'auth','0005_alter_user_last_login_null','2022-02-11 02:22:06.378671'),(8,'auth','0006_require_contenttypes_0002','2022-02-11 02:22:06.389397'),(9,'auth','0007_alter_validators_add_error_messages','2022-02-11 02:22:06.400986'),(10,'auth','0008_alter_user_username_max_length','2022-02-11 02:22:06.497356'),(11,'auth','0009_alter_user_last_name_max_length','2022-02-11 02:22:06.592837'),(12,'auth','0010_alter_group_name_max_length','2022-02-11 02:22:06.640020'),(13,'auth','0011_update_proxy_permissions','2022-02-11 02:22:06.654331'),(14,'auth','0012_alter_user_first_name_max_length','2022-02-11 02:22:06.754824'),(15,'auth','0013_alter_user_email','2022-02-11 02:22:06.819329'),(16,'django_boost','0001_initial','2022-02-11 02:22:06.830232'),(17,'django_boost','0002_auto_20191003_0518','2022-02-11 02:22:06.841222'),(18,'sessions','0001_initial','2022-02-11 02:22:06.907335'),(19,'words','0001_initial','2022-02-11 02:22:07.717674'),(20,'words','0002_alter_item_end_word_alter_item_start_word_and_more','2022-02-11 02:22:08.226446'),(21,'words','0003_item_end_is_merged_item_start_is_merged_and_more','2022-02-11 02:22:08.610530'),(22,'offices','0001_initial','2022-02-11 02:23:16.332038'),(23,'peace_keeping','0001_initial','2022-02-11 02:23:16.986823'),(24,'restore_order','0001_initial','2022-02-11 02:23:17.867004'),(25,'admin','0001_initial','2022-02-11 02:24:00.545351'),(26,'admin','0002_logentry_remove_auto_add','2022-02-11 02:24:00.557641'),(27,'admin','0003_logentry_add_action_flag_choices','2022-02-11 02:24:00.567548'),(28,'offices','0002_alter_officer_options_officer_date_joined_and_more','2022-02-11 02:24:01.755591'),(29,'peace_keeping','0002_service_stock_metadata','2022-02-28 01:54:07.208866');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,7 +294,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('99pyoe8micjts1x61fpm3fjryxm7q3hi','.eJxVjEEOwiAQRe_C2pABZmh16d4zkIGhUjU0Ke3KeHfbpAvdvvf-f6vA61LC2vIcRlEXZdTpl0VOz1x3IQ-u90mnqS7zGPWe6MM2fZskv65H-3dQuJVt7YUschIgj73BSIgQ_WDkDG5jNGTrmQFsdl5cTyl3GME56BJSNKQ-X767NsM:1nJ7C6:SiVTsrHoYudO46foozUA7lFmBNLjmc1DwUHJjubyqp4','2022-02-27 05:13:06.295673'),('dgqfnr3srb250dyw0os9rsz3qplve3n0','.eJxVjDsOwyAQBe9CHSHMbyFlep8BsSwEJxGWjF1FuXuE5CJp38y8Nwvx2Gs4et7CQuzKLLv8bhjTM7cB6BHbfeVpbfu2IB8KP2nn80r5dTvdv4Maex21EoROWR8nMMUDWCRfFCUSwjgQ5IRUky5gtLaEUicBKssCCLaUrNnnC9UGN4g:1nMktp:9LpX82lYr3heXb96CyO684cFXrIJvb4_HLeA92gEqZM','2022-03-09 06:13:17.440215'),('v5mc67diumfb0hhy4vrb0ugzlj7n3nmf','.eJxVjEEOwiAQRe_C2pABZmh16d4zkIGhUjU0Ke3KeHfbpAvdvvf-f6vA61LC2vIcRlEXZdTpl0VOz1x3IQ-u90mnqS7zGPWe6MM2fZskv65H-3dQuJVt7YUschIgj73BSIgQ_WDkDG5jNGTrmQFsdl5cTyl3GME56BJSNKQ-X767NsM:1nINMq:hoHC6ogTlD3o6lyrguub3lg-5AcvMxM9pglgxGtoszs','2022-02-25 04:17:08.204761');
+INSERT INTO `django_session` VALUES ('5vrd7xs4isd0zv8sdwoww184y0vjf34k','.eJzVUctOwzAQ_JXIZxqtk10nzZE7X9BU0fqRtkBTqYkRUtV_x3YKAUQ_gMvKnp2ZnbUvomM_7Ts_unN3sKIRUjx8xzSbFzfEhn3mYXfKzWmYzgedR0p-647508m618cb94fBnsd9UCtLBbKxQApriZoQQate2jWUAaPeFYoZoHClsmVNxlWooSyhMkhaUjCNk937JJqLCMZv3cBHF5xbjz32rVdGytZXVEHrqbAUqkEOukQ-TO44imYT6Io0fIkKBLH95MQ1Da0kSgJYxZeY-LxzU2d54tGF0ZtkYCBICSGu2vqQn2KNfiGvyxZI1elchRF_C5NEcZLrbIFIJojvCbGItV6ns80WCO3cuCtUaeIccr7U8i45xVeQLZeq_0-RdCLj_C_z62a_G2jFdnu9fgDKDOMm:1nOfOZ:CI1zddjksqL8zKp-3w5feeWMp0mzikdrkgafFFY2Gt8','2022-03-14 12:44:55.596159'),('99pyoe8micjts1x61fpm3fjryxm7q3hi','.eJxVjEEOwiAQRe_C2pABZmh16d4zkIGhUjU0Ke3KeHfbpAvdvvf-f6vA61LC2vIcRlEXZdTpl0VOz1x3IQ-u90mnqS7zGPWe6MM2fZskv65H-3dQuJVt7YUschIgj73BSIgQ_WDkDG5jNGTrmQFsdl5cTyl3GME56BJSNKQ-X767NsM:1nJ7C6:SiVTsrHoYudO46foozUA7lFmBNLjmc1DwUHJjubyqp4','2022-02-27 05:13:06.295673'),('dgqfnr3srb250dyw0os9rsz3qplve3n0','.eJxVjDsOwyAQBe9CHSHMbyFlep8BsSwEJxGWjF1FuXuE5CJp38y8Nwvx2Gs4et7CQuzKLLv8bhjTM7cB6BHbfeVpbfu2IB8KP2nn80r5dTvdv4Maex21EoROWR8nMMUDWCRfFCUSwjgQ5IRUky5gtLaEUicBKssCCLaUrNnnC9UGN4g:1nN9Hs:AhRsUn2UL-JsfEGsFQ2OIqFhTupwYGwGeRZnr3QyygI','2022-03-10 08:15:44.608027'),('v5mc67diumfb0hhy4vrb0ugzlj7n3nmf','.eJxVjEEOwiAQRe_C2pABZmh16d4zkIGhUjU0Ke3KeHfbpAvdvvf-f6vA61LC2vIcRlEXZdTpl0VOz1x3IQ-u90mnqS7zGPWe6MM2fZskv65H-3dQuJVt7YUschIgj73BSIgQ_WDkDG5jNGTrmQFsdl5cTyl3GME56BJSNKQ-X767NsM:1nINMq:hoHC6ogTlD3o6lyrguub3lg-5AcvMxM9pglgxGtoszs','2022-02-25 04:17:08.204761');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,7 +372,7 @@ CREATE TABLE `offices_officer` (
 
 LOCK TABLES `offices_officer` WRITE;
 /*!40000 ALTER TABLE `offices_officer` DISABLE KEYS */;
-INSERT INTO `offices_officer` VALUES (1,'b.a520y@gmail.com',NULL,'部署なし','2021-12-02 00:36:02.178000','2021-12-02 00:36:02.327000',141500,'2021-12-02 00:36:02.178000','',1,1,1,'2022-02-13 05:13:06.205863','','pbkdf2_sha256$320000$mI4Irod4TEKdjmxE48YqMh$dwsisa6d79Ul8Rv7ZSiQe8Zze4Qb7JyHNX/huACMwxM=','arakawayasuyuki'),(2,'c.a520y@gmail.com',NULL,'部署なし','2022-01-26 03:56:17.023000','2022-01-26 03:56:17.149000',999999,'2022-01-26 03:56:17.023000','',1,0,0,'2022-01-26 03:56:31.612000','','pbkdf2_sha256$320000$K7M0CVG55T9kbhGfMgbaMj$Q6vmPPAgYdO9pURh/Tw7ADHzWd7zYxlOUY/3PTKlrVo=','araya'),(4,'kahn@kanes.com',NULL,'総務課','2022-02-02 08:44:12.000000','2022-02-02 09:37:46.673000',473821,'2022-02-02 08:44:12.000000','',1,1,1,NULL,'','pbkdf2_sha256$320000$Na06W6QPrOjwYOpTeSEHDs$Pr+YqezRdhQKvJx/iGw9XB5x0bLg6oDUFfIjwD0uanA=','kahnkanes'),(5,'lahn@lanes.com',NULL,'市民課','2022-02-02 08:45:31.000000','2022-02-02 09:37:38.737000',141500,'2022-02-02 08:45:31.000000','',1,0,1,NULL,'','pbkdf2_sha256$320000$VBka3kpQeA6GAgt4ZzayLT$EW+/rp5ZR5guQYgpsbm96o5Sdv+0Hk5GTVsOComdHws=','lahnlanes'),(6,'central@officer.com',NULL,'内閣府','2022-02-02 08:47:16.000000','2022-02-11 04:28:50.738690',901000,'2022-02-02 08:47:16.000000','',1,1,1,'2022-02-23 06:13:17.360488','','pbkdf2_sha256$320000$8FDRTAgQgBaXwSKzE2ADoF$NmxEysuvY/Yy3XBQGUC83Jc0Er5oKftQxJu38NkYPLo=','centralofficer'),(7,'john@janes.com',NULL,'市民課','2022-02-02 08:49:03.000000','2022-02-02 09:37:25.927000',473821,'2022-02-02 08:49:03.000000','',1,1,1,'2022-02-04 04:35:05.603000','','pbkdf2_sha256$320000$1qz12lRloS4f8GEo3LDDU3$soj2h+E+XFJn3UaNe8odanlPYhY7Go3xadamFkWT5bY=','johnjanes');
+INSERT INTO `offices_officer` VALUES (1,'b.a520y@gmail.com',NULL,'部署なし','2021-12-02 00:36:02.178000','2021-12-02 00:36:02.327000',141500,'2021-12-02 00:36:02.178000','',1,1,1,'2022-02-28 02:10:37.678714','','pbkdf2_sha256$320000$mI4Irod4TEKdjmxE48YqMh$dwsisa6d79Ul8Rv7ZSiQe8Zze4Qb7JyHNX/huACMwxM=','arakawayasuyuki'),(2,'c.a520y@gmail.com',NULL,'部署なし','2022-01-26 03:56:17.023000','2022-01-26 03:56:17.149000',999999,'2022-01-26 03:56:17.023000','',1,0,0,'2022-01-26 03:56:31.612000','','pbkdf2_sha256$320000$K7M0CVG55T9kbhGfMgbaMj$Q6vmPPAgYdO9pURh/Tw7ADHzWd7zYxlOUY/3PTKlrVo=','araya'),(4,'kahn@kanes.com',NULL,'総務課','2022-02-02 08:44:12.000000','2022-02-02 09:37:46.673000',473821,'2022-02-02 08:44:12.000000','',1,1,1,NULL,'','pbkdf2_sha256$320000$Na06W6QPrOjwYOpTeSEHDs$Pr+YqezRdhQKvJx/iGw9XB5x0bLg6oDUFfIjwD0uanA=','kahnkanes'),(5,'lahn@lanes.com',NULL,'市民課','2022-02-02 08:45:31.000000','2022-02-02 09:37:38.737000',141500,'2022-02-02 08:45:31.000000','',1,0,1,NULL,'','pbkdf2_sha256$320000$VBka3kpQeA6GAgt4ZzayLT$EW+/rp5ZR5guQYgpsbm96o5Sdv+0Hk5GTVsOComdHws=','lahnlanes'),(6,'central@officer.com',NULL,'内閣府','2022-02-02 08:47:16.000000','2022-02-11 04:28:50.738690',901000,'2022-02-02 08:47:16.000000','',1,1,1,'2022-02-24 08:15:44.543061','','pbkdf2_sha256$320000$8FDRTAgQgBaXwSKzE2ADoF$NmxEysuvY/Yy3XBQGUC83Jc0Er5oKftQxJu38NkYPLo=','centralofficer'),(7,'john@janes.com',NULL,'市民課','2022-02-02 08:49:03.000000','2022-02-02 09:37:25.927000',473821,'2022-02-02 08:49:03.000000','',1,1,1,'2022-02-04 04:35:05.603000','','pbkdf2_sha256$320000$1qz12lRloS4f8GEo3LDDU3$soj2h+E+XFJn3UaNe8odanlPYhY7Go3xadamFkWT5bY=','johnjanes');
 /*!40000 ALTER TABLE `offices_officer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -486,6 +486,7 @@ CREATE TABLE `peace_keeping_service_stock` (
   `modified_at` datetime(6) NOT NULL,
   `area_id` int NOT NULL,
   `serv_name_id` varchar(255) NOT NULL,
+  `metadata` json DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `serv_id` (`serv_id`),
   UNIQUE KEY `ex_serv_id` (`ex_serv_id`),
@@ -493,7 +494,7 @@ CREATE TABLE `peace_keeping_service_stock` (
   KEY `peace_keeping_servic_serv_name_id_d14c1d17_fk_words_ser` (`serv_name_id`),
   CONSTRAINT `peace_keeping_servic_area_id_11353104_fk_offices_a` FOREIGN KEY (`area_id`) REFERENCES `offices_area` (`code`),
   CONSTRAINT `peace_keeping_servic_serv_name_id_d14c1d17_fk_words_ser` FOREIGN KEY (`serv_name_id`) REFERENCES `words_service_name` (`phrase`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -502,7 +503,7 @@ CREATE TABLE `peace_keeping_service_stock` (
 
 LOCK TABLES `peace_keeping_service_stock` WRITE;
 /*!40000 ALTER TABLE `peace_keeping_service_stock` DISABLE KEYS */;
-INSERT INTO `peace_keeping_service_stock` VALUES (14,'c1c2-901000-1','c1c2','夫の氏名|妻の氏名',NULL,NULL,NULL,'部署なし',1,'2021-12-22 03:48:45.000000','2022-01-05 08:01:10.776000',901000,'婚姻届'),(17,'c1c2-o6-141500-1','c1c2','夫の氏名|妻の氏名','o6','マイナンバーID',NULL,'部署なし',1,'2022-01-05 07:53:16.000000','2022-01-05 08:01:18.018000',141500,'婚姻届'),(21,'c8c4c7-901000-1','c8c4c7','氏名|住所|電話番号',NULL,NULL,NULL,'部署なし',1,'2022-01-06 11:34:43.121000','2022-01-06 11:34:43.127000',901000,'住民異動届'),(23,'c8c4c7-o5-141500-1','c8c4c7','氏名|住所|電話番号','o5','新住所',NULL,'部署なし',1,'2022-01-06 12:00:51.160000','2022-01-06 12:00:51.175000',141500,'住民異動届'),(24,'c8c4c7c6-o5-901000-2','c8c4c7c6','氏名|住所|電話番号|マイナンバーID','o5','新住所','c8c4c7-o5-141500-1','部署なし',2,'2022-01-09 08:51:30.969000','2022-01-09 08:51:30.974000',901000,'住民異動届'),(31,'c8c4c7-o5o1-141500-2','c8c4c7','氏名|住所|電話番号','o5o1','新住所|夫の住所',NULL,'部署なし',2,'2022-01-12 14:01:01.000000','2022-01-12 14:03:12.705000',141500,'住民異動届'),(34,'c10-901000-1','c10','父の氏名',NULL,NULL,NULL,'部署なし',1,'2022-01-20 02:59:09.856000','2022-01-20 02:59:09.860000',901000,'出生届'),(36,'c9-901000-1','c9','世帯年収',NULL,NULL,NULL,'部署なし',1,'2022-01-26 05:14:58.438000','2022-01-26 05:14:58.442000',901000,'住民異動届'),(39,'c8c4-473821-1','c8c4','氏名|住所',NULL,NULL,NULL,'部署なし',1,'2022-02-04 04:35:57.952000','2022-02-04 04:35:57.957000',473821,'住民異動届');
+INSERT INTO `peace_keeping_service_stock` VALUES (14,'c1c2-901000-1','c1c2','夫の氏名|妻の氏名',NULL,NULL,NULL,'部署なし',1,'2021-12-22 03:48:45.000000','2022-01-05 08:01:10.776000',901000,'婚姻届',NULL),(17,'c1c2-o6-141500-1','c1c2','夫の氏名|妻の氏名','o6','マイナンバーID',NULL,'部署なし',1,'2022-01-05 07:53:16.000000','2022-01-05 08:01:18.018000',141500,'婚姻届',NULL),(21,'c8c4c7-901000-1','c8c4c7','氏名|住所|電話番号',NULL,NULL,NULL,'部署なし',1,'2022-01-06 11:34:43.121000','2022-01-06 11:34:43.127000',901000,'住民異動届',NULL),(24,'c8c4c7c6-o5-901000-2','c8c4c7c6','氏名|住所|電話番号|マイナンバーID','o5','新住所','c8c4c7-o5-141500-1','部署なし',2,'2022-01-09 08:51:30.969000','2022-01-09 08:51:30.974000',901000,'住民異動届',NULL),(34,'c10-901000-1','c10','父の氏名',NULL,NULL,NULL,'部署なし',1,'2022-01-20 02:59:09.856000','2022-01-20 02:59:09.860000',901000,'出生届',NULL),(36,'c9-901000-1','c9','世帯年収',NULL,NULL,NULL,'部署なし',1,'2022-01-26 05:14:58.438000','2022-01-26 05:14:58.442000',901000,'住民異動届',NULL),(39,'c8c4-473821-1','c8c4','氏名|住所',NULL,NULL,NULL,'部署なし',1,'2022-02-04 04:35:57.952000','2022-02-04 04:35:57.957000',473821,'住民異動届',NULL),(40,'c5-141500-1','c5','新住所',NULL,NULL,NULL,'部署なし',1,'2022-02-28 12:44:55.477490','2022-02-28 12:44:55.481385',141500,'住民異動届','{\"新住所\": {\"input_field\": \"text\"}}');
 /*!40000 ALTER TABLE `peace_keeping_service_stock` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -537,7 +538,7 @@ CREATE TABLE `peace_keeping_used_service` (
 
 LOCK TABLES `peace_keeping_used_service` WRITE;
 /*!40000 ALTER TABLE `peace_keeping_used_service` DISABLE KEYS */;
-INSERT INTO `peace_keeping_used_service` VALUES (6,1,NULL,'c8c4c7c5','adam|jp|01-1111-1111|US','2022-01-06 13:56:18.648000','2022-01-06 13:56:18.655000',NULL,'c8c4c7-o5-141500-1'),(7,2,NULL,'c8c4c7c5','black|jp|02-2222-2222|US','2022-01-06 13:57:32.349000','2022-01-06 13:57:32.366000',NULL,'c8c4c7-o5-141500-1'),(8,1,NULL,'c1c2','adam|alice','2022-01-06 13:58:05.234000','2022-01-06 13:58:05.239000',NULL,'c1c2-o6-141500-1'),(9,2,NULL,'c1c2','adam|alice','2022-01-06 13:59:23.619000','2022-01-06 13:59:23.631000',NULL,'c1c2-o6-141500-1'),(10,2,NULL,'c1c2','adam|alice','2022-01-13 02:04:12.985000','2022-01-13 02:04:12.996000',NULL,'c1c2-o6-141500-1');
+INSERT INTO `peace_keeping_used_service` VALUES (8,1,NULL,'c1c2','adam|alice','2022-01-06 13:58:05.234000','2022-01-06 13:58:05.239000',NULL,'c1c2-o6-141500-1'),(9,2,NULL,'c1c2','adam|alice','2022-01-06 13:59:23.619000','2022-01-06 13:59:23.631000',NULL,'c1c2-o6-141500-1'),(10,2,NULL,'c1c2','adam|alice','2022-01-13 02:04:12.985000','2022-01-13 02:04:12.996000',NULL,'c1c2-o6-141500-1');
 /*!40000 ALTER TABLE `peace_keeping_used_service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -865,4 +866,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-23 15:24:17
+-- Dump completed on 2022-02-28 22:50:50
