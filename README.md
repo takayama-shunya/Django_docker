@@ -1,14 +1,21 @@
 # Docker for Service ID
 
-
-
-## Version
+**Version**
 
 荒川Mac：*Docker Desktop 4.3.2 (72729)* 
 
 
 
-## Quick Start
+## Index
+
+1. [Quick Start](#Quick_Start)
+2. [Log](#Log)
+3. [DB](#DB)
+3. [Django](#Django)
+
+
+
+## Quick_Start
 
 ### Download Docker
 
@@ -44,12 +51,12 @@ wsl --set-default-version 2
 4. Dockerを起動する。
    - 成功する場合は`For Mac & Windows`へ。
    - 起動が失敗する場合は次を実行。
-     
+   
 5. BIOSの設定を変更。
    1. `再起動 -> [DELETE]key長押し`(メーカーによってキーが`F2` `F12`など異なる)で以下のような画面に入る。
    2. `CPUの設定項目` > `Intel Virtualization Technology`の項目を探して有効化する。**メーカーによって表現が違うので注意。**以下は参考。
 
-![BIOS](READMEs/files/images/BIOS.jpg)
+<img src="READMEs/files/images/BIOS.jpg" alt="BIOS" style="zoom: 25%;" align="left" />
 
 
 
@@ -106,10 +113,142 @@ docker-compose up
 
 Dockerで動かしているプロジェクトは、コンソールでログを表示できないので、debug_toolbarのタブを開いてログを表示する。
 
-![toolbar_1](READMEs/files/images/debug_toolbar_3.png)
+<img src="READMEs/files/images/debug_toolbar_3.png" alt="toolbar_1" style="zoom:33%;" align="left" />
 
 
 
 
+
+
+
+## MySQL
+
+### Backup
+
+1. 以下のコマンドで`sql`ファイルを生成
+
+```bash
+cd service_id_on_docker
+docker exec -it service-id-on-docker_db_1 mysqldump -u root -p"secret" django_local > ./docker/mysql/initdb.d/0010_backup.sql
+```
+
+
+
+2. **<u>`./docker/mysql/initdb.d/0010_backup.sql`の1行目(もしくは1行目からの数行)に、余計なコメントが入ってエラーを起こすので目視で確認して削除。</u>**
+   (Docker Desctop for Mac 4.4.2 (73305)での現象)
+
+
+
+### Restore
+
+`Docker Desktop`で、利用しているvolume `service-id-on-docker_db-store`を削除(このVolumeを削除するためにコンテナ削除が必要かも)して以下を実行。
+
+注：以下を実行すると自動的に`./docker/mysql/initdb.d/0010_backup.sql`を読み込む。
+
+```shell
+# volumeがとまってないと削除できないので停止
+docker-compose down
+
+# volume削除
+docker volume rm service-id-on-docker_db-store
+
+# volumeを初期化してDBをバックアップから再構築
+docker-compose build
+docker-compose exec root ./manage.py collectstatic
+docker-compose up -d
+```
+
+
+
+### Delete records
+
+#### Login
+
+```plaintext
+docker exec -it service-id-on-docker_db_1 mysql -u root -p
+```
+
+
+
+#### Delete All
+
+```plaintext
+DELETE FROM table_name;
+```
+
+
+
+#### Delete Partially
+
+```plaintext
+DELETE FROM table_name WHERE id > 5 AND del_flg = 1;
+```
+
+### 	  
+
+
+
+## Django
+
+### Basic usage
+
+```shell
+# collectstatic
+docker-compose exec root ./manage.py collectstatic
+
+# migrate
+docker-compose exec root ./manage.py migrate
+
+# makemigrations
+docker-compose exec root ./manage.py makemigrations
+```
+
+
+
+### Makemigrations
+
+```bash
+docker-compose exec root python3 manage.py makemigrations offices 
+docker-compose exec root python3 manage.py makemigrations peace_keeping
+docker-compose exec root python3 manage.py makemigrations restore_order 
+docker-compose exec root python3 manage.py makemigrations words 
+
+docker-compose exec root python3 manage.py migrate
+```
+
+
+
+
+
+### Seed Backup
+
+#### All
+
+```bash
+docker-compose exec root python3 manage.py dumpdata peace_keeping --indent 1 > peace_keeping/seed/0020_peace_keeping.json
+docker-compose exec root python3 manage.py dumpdata words --indent 1 > words/seed/0020_word_full.json
+docker-compose exec root python3 manage.py dumpdata offices --indent 1 > offices/seed/0020_office.json
+docker-compose exec root python3 manage.py dumpdata restore_order --indent 1 > restore_order/seed/0020_restore_order.json
+```
+
+
+
+#### partial backup
+
+```
+docker-compose exec root python3 manage.py dumpdata words -e words.service_item -e words.service_name --indent 1 > words/seed/0020_word.json
+docker-compose exec root python3 manage.py dumpdata words -e words.service_name --indent 1 > words/seed/0020_word.json
+```
+
+
+
+### Load seed to MySQL
+
+```bash
+docker-compose exec root python3 manage.py loaddata offices/seed/0010_office.json
+docker-compose exec root python3 manage.py loaddata words/seed/0020_word_full.json
+docker-compose exec root python3 manage.py loaddata peace_keeping/seed/0020_peace_keeping.json
+docker-compose exec root python3 manage.py loaddata restore_order/seed/0020_restore_order.json
+```
 
 
