@@ -31,7 +31,7 @@ services:
     command: uwsgi --socket :8001 --module property_owner_db.wsgi --py-autoreload 1 --logto /tmp/tmp.log
     # moduleの〜.wsgiはwsgiファイルの置いてあるフォルダ名
     volumes:
-      - ./property_owner_db:/workspace
+      - ./owner_db:/workspace
     expose:
       - "8001"
     depends_on:
