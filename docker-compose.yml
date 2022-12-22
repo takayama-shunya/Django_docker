@@ -29,7 +29,6 @@ services:
   app:
     build: ./docker/python
     command: uwsgi --socket :8001 --module property_owner_db.wsgi --py-autoreload 1 --logto /tmp/tmp.log
-    # moduleの〜.wsgiはwsgiファイルの置いてあるフォルダ名
     volumes:
       - ./owner_db:/workspace
     expose:
