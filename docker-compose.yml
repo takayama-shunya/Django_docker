@@ -18,19 +18,18 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./owner_db:/workspace
+      - ./src:/workspace
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./docker/nginx/uwsgi_params:/etc/nginx/uwsgi_params
-      - ./owner_db/static:/static
     working_dir: /workspace
     depends_on:
       - app
 
   app:
     build: ./docker/python
-    command: uwsgi --socket :8001 --module property_owner_db.wsgi --py-autoreload 1 --logto /tmp/tmp.log
+    command: uwsgi --socket :8001 --module app.wsgi --py-autoreload 1 --logto /tmp/tmp.log
     volumes:
-      - ./owner_db:/workspace
+      - ./src:/workspace
     expose:
       - "8001"
     depends_on:
